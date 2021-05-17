@@ -1,6 +1,6 @@
 export * from './Header/Header'
 export * from './ProductCard/ProductCard'
-export * from './CardsList/CardsList'
+export { default as CardsList } from './CardsList/CardsList'
 export * from './Paginator/Paginator'
 export * from './Thanks/Thanks'
 export * from './CartList/CartList'

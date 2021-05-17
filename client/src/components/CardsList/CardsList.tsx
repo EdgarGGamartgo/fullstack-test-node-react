@@ -4,10 +4,13 @@ import {
   Paginator,
 } from './../'
 import { CardMock } from './../../__mocks__'
+import { fetchCardsListRequest } from './../../redux'
+import { connect } from 'react-redux'
+
 import './CardsList.scss'
 
-export const CardsList = () => {
-
+const CardsList = ({ fetchCardsList, cardsList }: any) => {
+  console.log('cardsList: ', cardsList)
   const [page, setPage] = React.useState(1);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
@@ -27,4 +30,18 @@ export const CardsList = () => {
     </>
   );
 }
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+      fetchCardsList: (request: any) => dispatch(fetchCardsListRequest(request)),
+  }
+}
+
+const mapStateToProps = (state: any) => {
+      return {
+        cardsList: state.foodShop,
+      }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardsList)
 

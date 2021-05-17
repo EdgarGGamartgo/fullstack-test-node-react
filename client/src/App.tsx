@@ -1,27 +1,29 @@
 import React from 'react';
 import { ProductsList, ThankYou, ShoppingCart } from './layouts'
+import { Provider } from 'react-redux'
+import store from './redux/store'
 
  const ProductsListPage = () => {
   return (
-    <div>
+    <Provider store={store}>
       <ProductsList/>
-    </div>
+    </Provider>
   );
 }
 
  const ThankYouPage = () => {
   return (
-    <div>
+    <Provider store={store}>
       <ThankYou/>
-    </div>
+    </Provider>
   );
 }
 
  const ShoppingCartPage = () => {
   return (
-    <div>
+    <Provider store={store}>
       <ShoppingCart/>
-    </div>
+    </Provider>
   );
 }
 
