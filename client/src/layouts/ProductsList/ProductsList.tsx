@@ -5,7 +5,7 @@ import './ProductsList.scss'
 export const ProductsList = () => {
   return (
     <>
-      <Header/>
+      <Header renderCart={true}/>
       <CardsList/>
     </>
   );

@@ -1,10 +1,11 @@
 import React from 'react';
-import { ProductsList } from './layouts'
+import { ProductsList, ThankYou } from './layouts'
 
 function App() {
   return (
     <div>
       <ProductsList/>
+      {/* <ThankYou/> */}
     </div>
   );
 }
