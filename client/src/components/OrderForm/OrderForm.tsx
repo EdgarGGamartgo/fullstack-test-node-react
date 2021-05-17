@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik'
 import './OrderForm.scss'
 
@@ -30,7 +30,7 @@ const validate = (values: any): any => {
 }
 
 export const OrderForm = ({ }: OrderFormProps) => {
-
+  const [disOrderButton, setDisOrderButton] = React.useState(true);
   const initialValues: any = {
     name: '',
     address: '',
@@ -39,13 +39,21 @@ export const OrderForm = ({ }: OrderFormProps) => {
     phoneNumber: ''
   }
 
+  const disableOrderButton = () => {
+    console.log('formik: ', formik)
+    if (formik.errors) {
+      setDisOrderButton(true)
+    } else {
+      setDisOrderButton(false)
+    }
+  }
+
   //@ts-ignore
-  const formik: any = useFormik({
+  const formik = useFormik({
     initialValues,
     validate,
   })
 
-  console.log(formik)
   
   return (
     <>
@@ -132,52 +140,10 @@ export const OrderForm = ({ }: OrderFormProps) => {
   
 </div>
 <div className="form-actions">
-        <button>Place Order</button>
-        <a href='#'>Back to List</a>
+        <button disabled={formik.isValid ? false : true} onClick={disableOrderButton}>Place Order</button>
+        <a href='/'>Back to List</a>
   </div>
-    {/* 
-    <div className="form-container">
-    <div className="form-actions">
-      <h5>Customer Information</h5>
-      </div>
-      <div className="form-actions">
-        <label>Full Name*</label>
-        <input name="name" id="name" value={formik.values.name} onBlur={formik.handleBlur} onChange={formik.handleChange} placeholder="*Name here" />
-      </div>
-      {formik.touched.name && formik.errors.name ? (
-          <span>{formik.errors.name}</span>
-        ) : null}
-      <div className="form-actions">
-        <label>ID*</label>
-        <input name="id" id="id" value={formik.values.id} onBlur={formik.handleBlur} onChange={formik.handleChange} placeholder="*Id here" />
-      </div>
-      {formik.touched.id && formik.errors.id ? (
-          <span>{formik.errors.id}</span>
-        ) : null}
-      <div className="form-actions">
-        <label>Address*</label>
-        <input name="address" id="address" value={formik.values.address} onBlur={formik.handleBlur} onChange={formik.handleChange} placeholder="*Address here" />
-      </div>
-      {formik.touched.address && formik.errors.address ? (
-          <span>{formik.errors.address}</span>
-        ) : null}
-      <div className="form-actions">
-        <label>Phone Number</label>
-        <input name="phoneNumber" id="phoneNumber" value={formik.values.phoneNumber} onBlur={formik.handleBlur} onChange={formik.handleChange} placeholder="Phone Number here" />
-      </div>
-      <div className="form-actions">
-        <label>Email*</label>
-        <input name="email" id="email" value={formik.values.email} onBlur={formik.handleBlur} onChange={formik.handleChange} placeholder="*Email here" />
-      </div>
-      {formik.touched.email && formik.errors.email ? (
-          <span>{formik.errors.email}</span>
-        ) : null}
-      <div className="form-actions">
-        <button>Place Order</button>
-        <a href='#'>Back to List</a>
-      </div>
-    </div> */}
-    </>
+  </>
   );
 }
 
