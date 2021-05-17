@@ -1,4 +1,8 @@
-export const CardMock = [
+export const CardMock = {
+    totalOfCards: 24,
+    pages: 3,
+    currentPage: 1,
+    cards: [
     {
         title: 'Samsung Galaxy Note 10+ Plus Factory Unlocked Cell',
         category: 'Product Category',
@@ -168,3 +172,4 @@ export const CardMock = [
         id: 24
     },
 ]
+}
