@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useFormik } from 'formik'
+import { useHistory } from "react-router-dom";
+
 import './OrderForm.scss'
 
 interface OrderFormProps {
@@ -30,7 +32,6 @@ const validate = (values: any): any => {
 }
 
 export const OrderForm = ({ }: OrderFormProps) => {
-  const [disOrderButton, setDisOrderButton] = React.useState(true);
   const initialValues: any = {
     name: '',
     address: '',
@@ -39,13 +40,17 @@ export const OrderForm = ({ }: OrderFormProps) => {
     phoneNumber: ''
   }
 
-  const disableOrderButton = () => {
-    console.log('formik: ', formik)
-    if (formik.errors) {
-      setDisOrderButton(true)
-    } else {
-      setDisOrderButton(false)
-    }
+  
+    let history = useHistory();
+
+  const placeOrder = () => {
+    history.push({
+  pathname: '/thanks',
+  search: '',  // query string
+  state: {  // location state
+    updateThank: true, 
+  },
+});
   }
 
   //@ts-ignore
@@ -54,7 +59,7 @@ export const OrderForm = ({ }: OrderFormProps) => {
     validate,
   })
 
-  
+  console.log('formik: ', formik)
   return (
     <>
     <h5>Ready to Order?</h5>
@@ -140,7 +145,7 @@ export const OrderForm = ({ }: OrderFormProps) => {
   
 </div>
 <div className="form-actions">
-        <button disabled={formik.isValid ? false : true} onClick={disableOrderButton}>Place Order</button>
+        <button disabled={formik.isValid && formik.values.id !== '' ? false : true} onClick={placeOrder}>Place Order</button>
         <a href='/'>Back to List</a>
   </div>
   </>
