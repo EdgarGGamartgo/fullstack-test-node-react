@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, CartList } from './../../components'
+import { Header, CartList, OrderForm } from './../../components'
 
 interface ShoppingCartProps {
     userName?: string,
@@ -14,6 +14,7 @@ export const ShoppingCart = ({
     <>
       <Header renderCart={false}/>
       <CartList />
+      <OrderForm/>
     </>
   );
 }

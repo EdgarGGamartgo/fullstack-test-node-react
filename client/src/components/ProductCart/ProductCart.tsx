@@ -10,7 +10,6 @@ const useStyles = makeStyles({
   root: {
     width: '100%',
     marginBottom: 20,
-    height: 60,
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'row',
@@ -78,6 +77,7 @@ export const ProductCart = ({ title, category, unitPrice, quantity, totalPrice, 
             <select name="quantities" id="quantities">
                {renderQuantity() && renderQuantity().map(option => option)}
             </select>
+            <img width={'20px'} height={'20px'} className='logo' src='./trashIcon.jpg' alt="logo" />
           </Typography>
         </CardContent>
         <CardContent>
