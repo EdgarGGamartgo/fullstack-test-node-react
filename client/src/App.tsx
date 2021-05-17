@@ -1,14 +1,28 @@
 import React from 'react';
 import { ProductsList, ThankYou, ShoppingCart } from './layouts'
 
-function App() {
+ const ProductsListPage = () => {
   return (
     <div>
-      {/* <ProductsList/> */}
-      {/* <ThankYou/> */}
+      <ProductsList/>
+    </div>
+  );
+}
+
+ const ThankYouPage = () => {
+  return (
+    <div>
+      <ThankYou/>
+    </div>
+  );
+}
+
+ const ShoppingCartPage = () => {
+  return (
+    <div>
       <ShoppingCart/>
     </div>
   );
 }
 
-export default App;
+export { ProductsListPage, ThankYouPage, ShoppingCartPage };

@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import App from './App';
+import { ProductsListPage, ThankYouPage, ShoppingCartPage } from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Router>
+       <Switch>
+		      <Route exact path="/" component={ProductsListPage}/>
+		      <Route exact path="/thanks" component={ThankYouPage}/>
+		      <Route exact path="/cart" component={ShoppingCartPage}/>
+          <Redirect to="/" />
+	    </Switch>
+    </Router>,
   document.getElementById('root')
 );
 

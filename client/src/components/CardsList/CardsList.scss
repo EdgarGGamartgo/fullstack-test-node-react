@@ -1,12 +1,15 @@
 .card-container {
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    align-self: center;
+    flex-wrap: wrap;
+    margin: 30px;
+}
+
+
+.row {
+    width: auto;
+}
+.flex-item {
+    text-align: center;
 }

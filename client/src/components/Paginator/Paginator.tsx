@@ -5,6 +5,9 @@ import './Paginator.scss'
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignSelf: 'center',
     '& > *': {
       marginTop: theme.spacing(2),
     },
