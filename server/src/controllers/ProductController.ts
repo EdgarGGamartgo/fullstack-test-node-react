@@ -5,7 +5,7 @@ import {
     getAllProducts,
  } from './../services'
 import {
-    getAllProductsValidation,
+    //getAllProductsValidation,
     LoggerMiddleware,
 } from './../middlewares'
 
@@ -13,14 +13,14 @@ const router = express.Router()
 
 router.get('/',
     LoggerMiddleware,
-    getAllProductsValidation,
+    //getAllProductsValidation,
     validateRequest,
     async (req: Request, res: Response) => {
         const { method } = req
-
+        console.log('HELLO PRODUCT')
         try {
             const products = await getAllProducts()
-            res.status(200).send({});
+            res.status(200).send(products);
         } catch (e) {
             ErrorHandler(req.params, method, e, 'Cant retrieve products')
         }

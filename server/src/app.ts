@@ -10,7 +10,7 @@ app.use(cors())
 app.set('trust proxy', true)
 app.use(json())
 
-app.use('/api/product', ProductController)
+app.use('/api/products' , ProductController)
 app.use('/api/order', OrderController)
 
 app.all('*', async(req, res) => {

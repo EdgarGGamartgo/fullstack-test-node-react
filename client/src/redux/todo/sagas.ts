@@ -6,7 +6,7 @@ import { FETCH_TODO_REQUEST } from "./actionTypes";
 import { ITodo } from "./types";
 
 const getTodos = () =>
-  axios.get<ITodo[]>("https://jsonplaceholder.typicode.com/todos");
+  axios.get<any>("http://localhost:3001/api/products");
 
 /*
   Worker Saga: Fired on FETCH_TODO_REQUEST action
@@ -17,7 +17,7 @@ function* fetchTodoSaga() {
     const response = yield call(getTodos);
     yield put(
       fetchTodoSuccess({
-        todos: response.data,
+        data: response.data,
       })
     );
   } catch (e) {

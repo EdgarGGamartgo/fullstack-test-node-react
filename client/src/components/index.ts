@@ -1,5 +1,5 @@
-export * from './Header/Header'
-export * from './ProductCard/ProductCard'
+export { default as Header } from './Header/Header'
+export { default as ProductCard } from './ProductCard/ProductCard'
 export { default as CardsList } from './CardsList/CardsList'
 export * from './Paginator/Paginator'
 export * from './Thanks/Thanks'

@@ -2,8 +2,11 @@ import { BuildOptions, Model } from "sequelize";
 
 export interface OrderAttrs {
     id: number;
-    order_info: string;
+    address: string;
+    phone: string;
     is_deleted: boolean;
+    email: string;
+    quantity: number;
   }
 
 export interface OrderModel extends Model<OrderAttrs>, OrderAttrs {}

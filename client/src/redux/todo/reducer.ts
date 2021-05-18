@@ -6,13 +6,13 @@ import {
 
 import { TodoActions, TodoState } from "./types";
 
-const initialState: TodoState = {
+const initialState: any = {
   pending: false,
-  todos: [],
+  products: [],
   error: null,
 };
 
-export default (state = initialState, action: TodoActions) => {
+export default (state = initialState, action: any) => {
   switch (action.type) {
     case FETCH_TODO_REQUEST:
       return {
@@ -23,14 +23,14 @@ export default (state = initialState, action: TodoActions) => {
       return {
         ...state,
         pending: false,
-        todos: action.payload.todos,
+        products: action.payload,
         error: null,
       };
     case FETCH_TODO_FAILURE:
       return {
         ...state,
         pending: false,
-        todos: [],
+        products: [],
         error: action.payload.error,
       };
     default:

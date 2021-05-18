@@ -1,14 +1,17 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
+import { connect } from 'react-redux'
+
 import './Header.scss'
 
 interface HeaderProps {
-  renderCart: boolean
+  renderCart: boolean, productIds: any
 }
 
-export const Header = ({ renderCart }: HeaderProps) => {
+const Header = ({ renderCart, productIds }: HeaderProps) => {
 
   let history = useHistory();
+  console.log('productIds productIds: ', productIds)
   const goToCartPage = () => {
     history.push({
   pathname: '/cart',
@@ -29,7 +32,7 @@ export const Header = ({ renderCart }: HeaderProps) => {
         <img className='logo' onClick={goToHomePage} src='./fastFoodIcon.png' alt="logo" />
         <p>Fast Shopping</p>
         {
-          renderCart ? <div className='right'><img onClick={goToCartPage} className='cart' src='./shoppingCart.jpg' alt="cart" /><span>1</span></div> : null
+          renderCart ? <div className='right'><img onClick={goToCartPage} className='cart' src='./shoppingCart.jpg' alt="cart" /><span>{productIds!.productIds!.length}</span></div> : null
         }
     </div>
     <hr/>
@@ -37,3 +40,15 @@ export const Header = ({ renderCart }: HeaderProps) => {
   );
 }
 
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+  }
+}
+
+const mapStateToProps = (state: any) => {
+      return {
+          productIds: state.foodShop,
+      }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

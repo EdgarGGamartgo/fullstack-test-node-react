@@ -3,7 +3,7 @@ import {
 } from "./foodShopTypes"
 
 export const initialState = {
-        
+    productIds: []
 }
 
 const reducer = (state = initialState, action: any) => {
@@ -11,7 +11,7 @@ const reducer = (state = initialState, action: any) => {
         case FETCH_FOODSHOP_REQUEST:
             return {
                 ...state,
-                ...action.payload
+                productIds: [...state.productIds, action.payload]
             }
         
         

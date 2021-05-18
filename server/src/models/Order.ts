@@ -9,10 +9,25 @@ export function OrderFactory (sequelize: Sequelize): OrderStatic {
             autoIncrement: false,
             primaryKey: true,
         },
-        order_info: {
+        quantity: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            unique: false,
+        },
+        address: {
             type: DataTypes.STRING,
-            autoIncrement: false,
-            primaryKey: true,
+            allowNull: false,
+            unique: false,
+        },
+        phone: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: false,
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: false,
         },
         is_deleted: {
             type: DataTypes.BOOLEAN,

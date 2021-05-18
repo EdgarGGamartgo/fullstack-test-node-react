@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   ProductCard,
   Paginator,
 } from './../'
 import { CardMock } from './../../__mocks__'
-import { fetchCardsListRequest } from './../../redux'
 import { fetchTodoRequest } from './../../redux/todo/actions'
 import {
   getPendingSelector,
@@ -16,62 +15,58 @@ import { connect } from 'react-redux'
 
 import './CardsList.scss'
 
-const CardsList = ({ fetchCardsList, cardsList }: any) => {
+const CardsList = () => {
   
-  console.log('cardsList: ', cardsList)
   const dispatch = useDispatch();
   const pending = useSelector(getPendingSelector);
-  const todos = useSelector(getTodosSelector);
+  const products = useSelector(getTodosSelector);
   const error = useSelector(getErrorSelector);
+  const [seePaginator, setSeePaginator] = useState(false);
 
   useEffect(() => {
     dispatch(fetchTodoRequest());
   }, []);
+
+  useEffect(() => {
+    const validateDta = products && products.data
+    if (validateDta) {
+      if (products.data.length > 20) {
+        setSeePaginator(true)
+      } else {
+        setSeePaginator(false)
+      }
+    }
+  }, [products]);
 
   const [page, setPage] = React.useState(1);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   }
 
+  const getPagination = () => {
+    const totalProducts = products && products.data && products.data
+    if (totalProducts > 20) {
+
+    }
+  }
+
   return (
-    <div style={{ padding: "15px" }}>
-      {pending ? (
-        <div>Loading...</div>
-      ) : error ? (
-        <div>Error</div>
-      ) : (
-        todos.map((todo, index) => (
-          <div style={{ marginBottom: "10px" }} key={todo.id}>
-            {++index}. {todo.title}
-          </div>
-        ))
-      )}
-    </div>
-    // <>
-    // <div className="card-container">
-    //     {
-    //         CardMock && CardMock.cards && CardMock.cards.map(card => {
-    //             const { id } = card;
-    //             return <ProductCard {...card} key={id} />
-    //         })
-    //     }
-    // </div>
-    // <Paginator pages={CardMock.pages} page={page} handleChange={handleChange}/>
-    // </>
+     <>
+     <div className="card-container">
+         {
+             products && products.data && products.data.map((product: any) => {
+                 const { id } = product;
+                 return <ProductCard {...product} key={id} />
+             })
+         }
+     </div>
+     {
+       seePaginator ? 
+       <Paginator pages={CardMock.pages} page={page} handleChange={handleChange}/> : null
+     }
+     </>
   );
 }
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-      fetchCardsList: (request: any) => dispatch(fetchCardsListRequest(request)),
-  }
-}
-
-const mapStateToProps = (state: any) => {
-      return {
-        cardsList: state.foodShop,
-      }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CardsList)
+export default CardsList
 

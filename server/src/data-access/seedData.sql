@@ -52,7 +52,3 @@ insert into productcategory(CategoryId, productId) values(2, 19);
 insert into productcategory(CategoryId, productId) values(2, 20);
 insert into productcategory(CategoryId, productId) values(2, 21);
 insert into productcategory(CategoryId, productId) values(2, 22);
-
-insert into Orders(id, order_info, is_deleted) values(1, "{\"orders\":[{\"productId\":\"1\",\"quantity\":\"2\",\"unitPrice\":\"$101.50\",\"totalPrice\":\"$203\"}]}", false);
-
-

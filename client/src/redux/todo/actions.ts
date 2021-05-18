@@ -11,20 +11,20 @@ import {
   FetchTodoFailurePayload,
 } from "./types";
 
-export const fetchTodoRequest = (): FetchTodoRequest => ({
+export const fetchTodoRequest = (): any => ({
   type: FETCH_TODO_REQUEST,
 });
 
 export const fetchTodoSuccess = (
-  payload: FetchTodoSuccessPayload
-): FetchTodoSuccess => ({
+  payload: any
+): any => ({
   type: FETCH_TODO_SUCCESS,
   payload,
 });
 
 export const fetchTodoFailure = (
-  payload: FetchTodoFailurePayload
-): FetchTodoFailure => ({
+  payload: any
+): any => ({
   type: FETCH_TODO_FAILURE,
   payload,
 });

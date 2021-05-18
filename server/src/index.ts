@@ -5,8 +5,8 @@ const start = async() => {
     
     await dbInit();
 
-    app.listen(process.env.PORT, () => {
-        console.log('Listening on port 3001!!!!!')
+    app.listen(process.env.APP_PORT, () => {
+        console.log(`Listening on port ${process.env.APP_PORT}!!!!!`)
     })
 }
 
