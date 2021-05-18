@@ -3,12 +3,11 @@ import { BuildOptions, Model } from "sequelize";
 export interface UserAttrs {
     id?: string;
     username: string;
-    login: string;
     password: string;
-    age: number;
+    address: string;
+    phone: string;
     is_deleted: boolean;
-    // createdAt?: Date;
-    // updatedAt?: Date;
+    email: string;
   }
 
 export interface UserModel extends Model<UserAttrs>, UserAttrs {}

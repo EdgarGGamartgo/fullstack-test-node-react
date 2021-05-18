@@ -1,5 +1,6 @@
-export * from './GroupMiddleware'
 export * from './UserMiddleware'
+export * from './OrderMiddleware'
 export * from './LoggerMiddleware'
 export * from './VerifySignUp'
 export * from './Auth'
+export * from './ProductMiddleware'

@@ -1,37 +1,25 @@
 import { DataTypes, Sequelize } from 'sequelize';
-import { UserStatic } from './../types/UserTypes';
+import { ProductStatic } from './../types';
 import { db } from '../data-access/dbConnect'
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
 
-export function UserFactory (sequelize: Sequelize): UserStatic {
-    return <UserStatic>sequelize.define("user", {
+export function ProductFactory (sequelize: Sequelize): ProductStatic {
+    return <ProductStatic>sequelize.define("product", {
         id: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             autoIncrement: false,
             primaryKey: true,
         },
-        username: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
         },
-        address: {
+        price: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: false,
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: false,
-        },
-        phone: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: false,
-        },
-        email: {
+        },  
+        summary: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: false,
@@ -46,4 +34,4 @@ export function UserFactory (sequelize: Sequelize): UserStatic {
     });
 }
 
-export const User = UserFactory(db)
+export const Product = ProductFactory(db)

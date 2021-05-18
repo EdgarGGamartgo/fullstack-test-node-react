@@ -1,4 +1,7 @@
-import { User, Group } from './'
+import { Product, Category, Order, User } from './'
 
-User.belongsToMany(Group, { through: 'UserGroup', onDelete: 'CASCADE' });
-Group.belongsToMany(User, { through: 'UserGroup', onDelete: 'CASCADE' });
+User.hasMany(Order);
+Order.belongsTo(User);
+
+Category.belongsToMany(Product, { through: 'ProductCategory', onDelete: 'CASCADE', timestamps: false });
+Product.belongsToMany(Category, { through: 'ProductCategory', onDelete: 'CASCADE', timestamps: false });

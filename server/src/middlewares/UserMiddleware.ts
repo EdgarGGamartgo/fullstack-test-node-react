@@ -1,6 +1,5 @@
 import { body, param } from 'express-validator'
 import { BadRequestError } from '@oregtickets/common'
-import { isDate } from './../services'
 
 
 export const loginValidation = [
@@ -53,13 +52,6 @@ export const createUserValidation = [
         .trim()
         .notEmpty()
         .isString()
-        .custom(date => {
-            if (isDate(date)) {
-                return true
-            } else {
-                throw new BadRequestError('login must be a valid date')
-            }
-        })
         .withMessage('You must supply login'),
     body('password')
         .trim()
@@ -100,13 +92,6 @@ export const updateUserValidation = [
         .trim()
         .notEmpty()
         .isString()
-        .custom(date => {
-            if (isDate(date)) {
-                return true
-            } else {
-                throw new BadRequestError('login must be a valid date')
-            }
-        })
         .withMessage('You must supply login'),
     body('age')
         .trim()
