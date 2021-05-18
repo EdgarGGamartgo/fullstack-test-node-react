@@ -1,12 +1,15 @@
 import React from 'react';
 import { ProductsList, ThankYou, ShoppingCart } from './layouts'
 import { Provider } from 'react-redux'
-import store from './redux/store'
+import { PersistGate } from 'redux-persist/integration/react'
+import { store, persistor }  from './redux/store'
 
  const ProductsListPage = () => {
   return (
     <Provider store={store}>
-      <ProductsList/>
+      <PersistGate loading={null} persistor={persistor}>
+        <ProductsList/>
+      </PersistGate>
     </Provider>
   );
 }
@@ -14,7 +17,9 @@ import store from './redux/store'
  const ThankYouPage = () => {
   return (
     <Provider store={store}>
-      <ThankYou/>
+      <PersistGate loading={null} persistor={persistor}>
+        <ThankYou/>
+      </PersistGate>
     </Provider>
   );
 }
@@ -22,7 +27,9 @@ import store from './redux/store'
  const ShoppingCartPage = () => {
   return (
     <Provider store={store}>
-      <ShoppingCart/>
+      <PersistGate loading={null} persistor={persistor}>
+        <ShoppingCart/>
+      </PersistGate>
     </Provider>
   );
 }
