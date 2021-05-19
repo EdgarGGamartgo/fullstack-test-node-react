@@ -5,16 +5,17 @@ import { fetchTodoFailure, fetchTodoSuccess } from "./actions";
 import { FETCH_TODO_REQUEST } from "./actionTypes";
 import { ITodo } from "./types";
 
-const getTodos = () =>
-  axios.get<any>("http://localhost:3001/api/products");
+const getTodos = ({ page, size }: any) =>
+  axios.get<any>(`http://localhost:3001/api/products?page=${page}&size=${size}`);
 
 /*
   Worker Saga: Fired on FETCH_TODO_REQUEST action
 */
-function* fetchTodoSaga() {
+function* fetchTodoSaga(payload: any) {
+  console.log('KASENI: ', payload)
   try {
     //@ts-ignore
-    const response = yield call(getTodos);
+    const response = yield call(getTodos, payload);
     yield put(
       fetchTodoSuccess({
         data: response.data,

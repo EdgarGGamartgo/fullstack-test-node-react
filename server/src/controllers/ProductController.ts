@@ -16,10 +16,11 @@ router.get('/',
     //getAllProductsValidation,
     validateRequest,
     async (req: Request, res: Response) => {
+        const { page, size }: any = req.query;
         const { method } = req
         console.log('HELLO PRODUCT')
         try {
-            const products = await getAllProducts()
+            const products = await getAllProducts(page, size)
             res.status(200).send(products);
         } catch (e) {
             ErrorHandler(req.params, method, e, 'Cant retrieve products')

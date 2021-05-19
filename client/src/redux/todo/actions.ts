@@ -11,8 +11,10 @@ import {
   FetchTodoFailurePayload,
 } from "./types";
 
-export const fetchTodoRequest = (): any => ({
+export const fetchTodoRequest = (page: number, size: number) => ({
   type: FETCH_TODO_REQUEST,
+  page,
+  size
 });
 
 export const fetchTodoSuccess = (

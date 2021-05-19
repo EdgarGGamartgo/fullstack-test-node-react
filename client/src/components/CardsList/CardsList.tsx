@@ -11,7 +11,6 @@ import {
   getErrorSelector,
 } from "./../../redux/todo/selectors";
 import { useDispatch, useSelector } from "react-redux";
-import { connect } from 'react-redux'
 
 import './CardsList.scss'
 
@@ -22,16 +21,19 @@ const CardsList = () => {
   const products = useSelector(getTodosSelector);
   const error = useSelector(getErrorSelector);
   const [seePaginator, setSeePaginator] = useState(false);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-    dispatch(fetchTodoRequest());
+    dispatch(fetchTodoRequest(0, 20));
   }, []);
 
   useEffect(() => {
-    const validateDta = products && products.data
+    const validateDta = products && products.data && products.data.totalItems
+    console.log('HANABI: ', products)
     if (validateDta) {
-      if (products.data.length > 20) {
+      if (products.data.totalItems > 20) {
         setSeePaginator(true)
+        setTotalPages(products.data.totalPages)
       } else {
         setSeePaginator(false)
       }
@@ -40,6 +42,7 @@ const CardsList = () => {
 
   const [page, setPage] = React.useState(1);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    dispatch(fetchTodoRequest(value - 1, 20));
     setPage(value);
   }
 
@@ -54,7 +57,7 @@ const CardsList = () => {
      <>
      <div className="card-container">
          {
-             products && products.data && products.data.map((product: any) => {
+             products && products.data && products.data && products.data.products.map((product: any) => {
                  const { id } = product;
                  return <ProductCard {...product} key={id} />
              })
@@ -62,7 +65,7 @@ const CardsList = () => {
      </div>
      {
        seePaginator ? 
-       <Paginator pages={CardMock.pages} page={page} handleChange={handleChange}/> : null
+       <Paginator pages={totalPages} page={page} handleChange={handleChange}/> : null
      }
      </>
   );
