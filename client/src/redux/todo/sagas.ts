@@ -12,7 +12,6 @@ const getTodos = ({ page, size }: any) =>
   Worker Saga: Fired on FETCH_TODO_REQUEST action
 */
 function* fetchTodoSaga(payload: any) {
-  console.log('KASENI: ', payload)
   try {
     //@ts-ignore
     const response = yield call(getTodos, payload);

@@ -18,7 +18,6 @@ const Header = ({ renderCart, productIds }: HeaderProps) => {
   }, [productIds.productIds])
 
   let history = useHistory();
-  console.log('productIds productIds: ', productIds)
   const goToCartPage = () => {
     history.push({
     pathname: '/cart',

@@ -59,7 +59,6 @@ export const OrderForm = ({ }: OrderFormProps) => {
     validate,
   })
 
-  console.log('formik: ', formik)
   return (
     <>
     <h5>Ready to Order?</h5>

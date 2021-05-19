@@ -51,7 +51,6 @@ const CartList = ({ productIds }: CartListProps) => {
           {
               cart && cart.data && cart.data.map((cart:any) => {
                   const { id } = cart;
-                  console.log('check IDS', id)
                   return <ProductCart {...cart} key={id} />
               })
           }

@@ -9,7 +9,6 @@ const getTodos = (state: AppState) => state.todo.products;
 const getError = (state: AppState) => state.todo.error;
 
 export const getTodosSelector = createSelector(getTodos, (data) => {
-  console.log('todos: ', data)
   return data
 });
 

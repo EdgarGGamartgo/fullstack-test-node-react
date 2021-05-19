@@ -29,7 +29,6 @@ const CardsList = () => {
 
   useEffect(() => {
     const validateDta = products && products.data && products.data.totalItems
-    console.log('HANABI: ', products)
     if (validateDta) {
       if (products.data.totalItems > 20) {
         setSeePaginator(true)

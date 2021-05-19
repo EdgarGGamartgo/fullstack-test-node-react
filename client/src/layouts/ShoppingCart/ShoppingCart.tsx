@@ -33,7 +33,6 @@ export const ShoppingCart = ({
     }
   }, [])
 
-  console.log('myparam: ', myparam)
 
   return (
     <>
