@@ -23,14 +23,22 @@ export const getCart = async(ids: object) => {
             return await Product.findOne({
                 where: {
                     is_deleted: false,
-                    id
+                    id: id[0]
                 },
-                attributes: ['id', 'name', 'price', 'summary'],
+                attributes: ['id', 'name', 'price'],
                 include: [{ model: Category, attributes: ['name']}] 
             })
         })
     )
-    return products.filter(r => r !== null)
+    return products.filter(r => r !== null).map((a:any, i: number) => {
+        let b = a.get({ plain: true })
+        let c = Number(b.price.substring(1));
+        b.totalProductPrice = `$${(productIds[i][1] * c).toFixed(2)}`
+        b.quantity = productIds[i][1]
+        const categories = b.Categories.map((cName: any) => cName.name )
+        b.Categories = categories.join(',')
+        return b
+    })
 }
 
 const getPagination = (page: any, size: any) => {

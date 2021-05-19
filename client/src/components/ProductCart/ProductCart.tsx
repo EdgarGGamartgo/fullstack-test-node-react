@@ -28,26 +28,23 @@ const useStyles = makeStyles({
 });
 
 interface ProductCartProps {
-  title: string, category: string, unitPrice: string, quantity: number, totalPrice: string, availability: number
+  name: string, Categories: string, price: string, quantity: string, totalProductPrice: string
 }
 
-export const ProductCart = ({ title, category, unitPrice, quantity, totalPrice, availability }: ProductCartProps) => {
+export const ProductCart = ({ name, Categories, price, quantity, totalProductPrice }: ProductCartProps) => {
   const classes = useStyles();
+
+  
 
   const renderQuantity = () => {
     let options = []
-    if (availability !== 0) {
-      for (let i = 1; i <  availability; i++) {
-          if (i === quantity) {
-            options.push(<option selected={true} value={i}>{i}</option>)
-          } else {
-            options.push(<option value={i}>{i}</option>)
-          }
-      } 
-    } else {
-      options.push(<option selected={true} value={1}>1</option>)
+    for (let i =0; i <= (+quantity + 5); i++) {
+      if (i === +quantity) {
+        options.push(<option selected={true} value={i}>{i}</option>)
+      } else {
+        options.push(<option value={i}>{i}</option>)
+      }
     }
-     
     return options
   }
 
@@ -55,10 +52,10 @@ export const ProductCart = ({ title, category, unitPrice, quantity, totalPrice, 
     <Card className={classes.root}>
         <CardContent>
           <Typography className={classes.title} gutterBottom>
-            {title}
+            {name}
           </Typography>
           <Typography className={classes.pos}>
-            {category}
+            {Categories}
           </Typography>
         </CardContent>
         <CardContent>
@@ -66,7 +63,7 @@ export const ProductCart = ({ title, category, unitPrice, quantity, totalPrice, 
             Unit Price
           </Typography>
           <Typography className={classes.pos}>
-            {unitPrice}
+            {price}
           </Typography>
         </CardContent>
         <CardContent>
@@ -82,7 +79,7 @@ export const ProductCart = ({ title, category, unitPrice, quantity, totalPrice, 
         </CardContent>
         <CardContent>
           <Typography className={classes.pos}>
-            {totalPrice}
+            {totalProductPrice}
           </Typography>
         </CardContent>
       </Card>

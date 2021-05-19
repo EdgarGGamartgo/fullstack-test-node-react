@@ -23,6 +23,18 @@ const CartList = ({ productIds }: CartListProps) => {
   const cart = useSelector(getCartSelector);
   const error = useSelector(getErrorSelector);
 
+  const totalCost = () => {
+    const validate = cart && cart.data
+    let sum =  0 
+    if (validate) {
+      cart.data.forEach((c:any) => {
+        let price = Number(c.price.substring(1));
+        sum += price
+      })
+    }
+    return `$${sum.toFixed(2)}`
+  } 
+
   useEffect(() => {
     console.log('cartII: ', productIds.productIds)
     dispatch(fetchCartRequest(productIds.productIds));
@@ -37,13 +49,13 @@ const CartList = ({ productIds }: CartListProps) => {
       <h5>Shopping Cart</h5>
       <div className="cart-container">
           {
-              CartListMock && CartListMock.carts && CartListMock.carts.map(cart => {
+              cart && cart.data && cart.data.map((cart:any) => {
                   const { id } = cart;
                   return <ProductCart {...cart} key={id} />
               })
           }
       </div>
-      <h6>Total: {CartListMock.accumulatedPrice}</h6>
+      <h6>Total: {totalCost()}</h6>
    </>
   );
 }
