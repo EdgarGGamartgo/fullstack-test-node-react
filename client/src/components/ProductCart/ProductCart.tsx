@@ -3,6 +3,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux'
+import { updateProductToCart } from './../../redux/FoodShop/foodShopActions'
 
 import './ProductCart.scss'
 
@@ -28,24 +30,35 @@ const useStyles = makeStyles({
 });
 
 interface ProductCartProps {
-  name: string, Categories: string, price: string, quantity: string, totalProductPrice: string
+  id: any, productIds: any, updateCart: any, name: string, Categories: string, price: string, quantity: string, totalProductPrice: string
 }
 
-export const ProductCart = ({ name, Categories, price, quantity, totalProductPrice }: ProductCartProps) => {
+const ProductCart = ({ id, productIds, updateCart, name, Categories, price, quantity, totalProductPrice }: ProductCartProps) => {
   const classes = useStyles();
 
-  
+  const handleSelect = (e: any) => {
+    const diffIds = productIds && productIds.productIds.filter((i:any) => i != +id)
+     for (let i = 1; i <= +e.target.value; i++) {
+       diffIds.push(id)
+     }
+    updateCart(diffIds)
+  }
 
   const renderQuantity = () => {
     let options = []
-    for (let i =0; i <= (+quantity + 5); i++) {
+    for (let i =1; i <= (+quantity + 5); i++) {
       if (i === +quantity) {
-        options.push(<option selected={true} value={i}>{i}</option>)
+        options.push(<option key={i} selected={true} value={i}>{i}</option>)
       } else {
-        options.push(<option value={i}>{i}</option>)
+        options.push(<option key={i} value={i}>{i}</option>)
       }
     }
     return options
+  }
+
+  const handleClick = () => {
+    const diffIds = productIds && productIds.productIds.filter((i:any) => i != id)
+    updateCart(diffIds)
   }
 
   return (
@@ -71,10 +84,10 @@ export const ProductCart = ({ name, Categories, price, quantity, totalProductPri
             Qty
           </Typography>
           <Typography className={classes.pos}>
-            <select name="quantities" id="quantities">
+            <select name="quantities" id="quantities" onChange={handleSelect}>
                {renderQuantity() && renderQuantity().map(option => option)}
             </select>
-            <img width={'20px'} height={'20px'} className='logo' src='./trashIcon.jpg' alt="logo" />
+            <img onClick={handleClick} width={'20px'} height={'20px'} className='logo' src='./trashIcon.jpg' alt="logo" />
           </Typography>
         </CardContent>
         <CardContent>
@@ -86,3 +99,16 @@ export const ProductCart = ({ name, Categories, price, quantity, totalProductPri
   );
 }
 
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    updateCart: (ids: any) => dispatch(updateProductToCart(ids))
+  }
+}
+
+const mapStateToProps = (state: any) => {
+  return {
+      productIds: state.foodShop,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCart)

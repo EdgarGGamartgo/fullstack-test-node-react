@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ProductCart } from '../ProductCart/ProductCart';
+import  ProductCart  from '../ProductCart/ProductCart';
 import { CartListMock } from './../../__mocks__'
 import { fetchCartRequest } from './../../redux/Cart/actions'
 import {
@@ -22,26 +22,26 @@ const CartList = ({ productIds }: CartListProps) => {
   const pending = useSelector(getPendingSelector);
   const cart = useSelector(getCartSelector);
   const error = useSelector(getErrorSelector);
+  const [totalCost, setTotalCost] = useState('')
 
-  const totalCost = () => {
+  const computeTotalCost = () => {
     const validate = cart && cart.data
     let sum =  0 
     if (validate) {
       cart.data.forEach((c:any) => {
-        let price = Number(c.price.substring(1));
+        let price = Number(c.totalProductPrice.substring(1));
         sum += price
       })
     }
-    return `$${sum.toFixed(2)}`
+    setTotalCost(`$${sum.toFixed(2)}`)
   } 
 
   useEffect(() => {
-    console.log('cartII: ', productIds.productIds)
     dispatch(fetchCartRequest(productIds.productIds));
-  }, []);
+  }, [productIds.productIds]);
 
   useEffect(() => {
-    console.log('RESPONSE ', cart)
+    computeTotalCost()
   }, [cart]);
 
   return (
@@ -51,11 +51,12 @@ const CartList = ({ productIds }: CartListProps) => {
           {
               cart && cart.data && cart.data.map((cart:any) => {
                   const { id } = cart;
+                  console.log('check IDS', id)
                   return <ProductCart {...cart} key={id} />
               })
           }
       </div>
-      <h6>Total: {totalCost()}</h6>
+      <h6>Total: {totalCost}</h6>
    </>
   );
 }
