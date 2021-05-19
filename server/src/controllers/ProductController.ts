@@ -3,9 +3,10 @@ import { validateRequest } from '@oregtickets/common'
 import { ErrorHandler } from './../handlers'
 import { 
     getAllProducts,
+    getCart,
  } from './../services'
 import {
-    //getAllProductsValidation,
+    //getCartValidation,
     LoggerMiddleware,
 } from './../middlewares'
 
@@ -13,7 +14,6 @@ const router = express.Router()
 
 router.get('/',
     LoggerMiddleware,
-    //getAllProductsValidation,
     validateRequest,
     async (req: Request, res: Response) => {
         const { page, size }: any = req.query;
@@ -29,17 +29,14 @@ router.get('/',
 
 router.get('/cart',
     LoggerMiddleware,
-    //getAllProductsValidation,
     validateRequest,
     async (req: Request, res: Response) => {
-        //const { page, size }: any = req.query;
         const { method } = req
-        console.log('HELLO PRODUCT: ', req.query)
         try {
-            //const products = await getAllProducts(page, size)
-            res.status(200).send(req.query);
+            const cart = await getCart(req.query)
+            res.status(200).send(cart);
         } catch (e) {
-            ErrorHandler(req.params, method, e, 'Cant retrieve products')
+            ErrorHandler(req.params, method, e, 'Cant retrieve cart')
         }
 })
 

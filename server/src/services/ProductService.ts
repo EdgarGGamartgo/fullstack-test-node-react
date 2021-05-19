@@ -5,9 +5,33 @@ import { BadRequestError } from '@oregtickets/common';
 
 export const getAllProducts = async(page: number, size: number) => {
     const { limit, offset } = getPagination(page, size);
-    const response = await Product.findAndCountAll({ limit, offset, include: Category })
+    const response = await Product.findAndCountAll({ 
+        where: {
+            is_deleted: false
+        },
+        limit, 
+        offset, 
+        include: Category 
+    })
     return getPagingData(response, page, limit);
-} 
+}
+
+export const getCart = async(ids: object) => {
+    const productIds = Object.entries(ids)
+    const products = await Promise.all(
+        productIds.map(async (id) => {
+            return await Product.findOne({
+                where: {
+                    is_deleted: false,
+                    id
+                },
+                attributes: ['id', 'name', 'price', 'summary'],
+                include: [{ model: Category, attributes: ['name']}] 
+            })
+        })
+    )
+    return products.filter(r => r !== null)
+}
 
 const getPagination = (page: any, size: any) => {
     const limit = size ? +size : 3;
