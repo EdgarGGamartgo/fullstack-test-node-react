@@ -11,18 +11,17 @@ import {
 
 const router = express.Router()
 
-router.get('/',
+router.post('/',
     LoggerMiddleware,
     createOrderValidation,
     validateRequest,
     async (req: Request, res: Response) => {
         const { method } = req
-
         try {
-            await createOrder()
-            res.status(200).send({});
+            const order = await createOrder(req.body)
+            res.status(201).send(order);
         } catch (e) {
-            ErrorHandler(req.params, method, e, 'Cant retrieve products')
+            ErrorHandler(req.body, method, e, 'Cant create order')
         }
 })
 

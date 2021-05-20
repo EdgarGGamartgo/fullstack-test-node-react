@@ -1,12 +1,11 @@
 import { BuildOptions, Model } from "sequelize";
 
 export interface OrderAttrs {
-    id: number;
-    address: string;
-    phone: string;
+    id?: number;
     is_deleted: boolean;
-    email: string;
     quantity: number;
+    order_track: string;
+    userId?: string;
   }
 
 export interface OrderModel extends Model<OrderAttrs>, OrderAttrs {}

@@ -14,18 +14,18 @@ export function UserFactory (sequelize: Sequelize): UserStatic {
         username: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true,
+            unique: false,
         },
         address: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: false,
         },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: false,
-        },
+        // password: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false,
+        //     unique: false,
+        // },
         phone: {
             type: DataTypes.STRING,
             allowNull: false,

@@ -1,5 +1,5 @@
-insert into Users(id, username, address, password, phone, email, is_deleted) values(1, 'Edgar', 'Mexico City', '$2y$12$ToaeHboyrDE73.ATIoKH7e5Vuc0D9xA7XZfLHvxqudSzfFX2gjZJ2', '1234567890', 'edgarggamartgo@gmail.com', false);
-insert into Users(id, username, address, password, phone, email, is_deleted) values(2, 'Andrea', 'Mexico City', '$2y$12$eSl0JeaFwHBM9fBVFQ6fd.Qxt0sq1jwuFYf4EFSKKGmgZSPMzlK0G', '0987654321', 'andrea@gmail.com', false);
+insert into Users(id, username, address, phone, email, is_deleted) values(1, 'Edgar', 'Mexico City', '1234567890', 'edgarggamartgo@gmail.com', false);
+insert into Users(id, username, address, phone, email, is_deleted) values(2, 'Andrea', 'Mexico City', '0987654321', 'andrea@gmail.com', false);
 
 insert into Categories(id, name, is_deleted) values(1, 'TV', false);
 insert into Categories(id, name, is_deleted) values(2, 'Mobile', false);

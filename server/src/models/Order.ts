@@ -6,7 +6,7 @@ export function OrderFactory (sequelize: Sequelize): OrderStatic {
     return <OrderStatic>sequelize.define("Order", {
         id: {
             type: DataTypes.INTEGER,
-            autoIncrement: false,
+            autoIncrement: true,
             primaryKey: true,
         },
         quantity: {
@@ -14,17 +14,7 @@ export function OrderFactory (sequelize: Sequelize): OrderStatic {
             allowNull: false,
             unique: false,
         },
-        address: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: false,
-        },
-        phone: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: false,
-        },
-        email: {
+        order_track: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: false,

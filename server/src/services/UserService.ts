@@ -1,8 +1,6 @@
 import { User } from './../models'
 import { UserAttrs } from './../types'
-import { db } from '../data-access/dbConnect'
 import { v4 as uuidv4 } from 'uuid';
-import { BadRequestError } from '@oregtickets/common';
 import { passwordIsValid, token } from './../utils'
 
 
@@ -45,22 +43,22 @@ export const deleteUser = async (id: string) => {
     })
 }
 
-export const logIn = async (username: string, requestPassword: string) => {
-    const user = await User.findOne({
-        where: {
-            username
-        },
-        raw: true,
-    })
-    if (!user) {
-        throw new BadRequestError('User Not Found!')
-    }
-    const { password, id } = user
-    passwordIsValid(requestPassword, password)
-    const accessToken = token(id!)
-    const response = {
-        ...user,
-        accessToken
-    }
-    return response
-}
+// export const logIn = async (username: string, requestPassword: string) => {
+//     const user = await User.findOne({
+//         where: {
+//             username
+//         },
+//         raw: true,
+//     })
+//     if (!user) {
+//         throw new BadRequestError('User Not Found!')
+//     }
+//     const { password, id } = user
+//     passwordIsValid(requestPassword, password)
+//     const accessToken = token(id!)
+//     const response = {
+//         ...user,
+//         accessToken
+//     }
+//     return response
+//}
