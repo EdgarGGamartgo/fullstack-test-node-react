@@ -36,7 +36,7 @@ const location: any = useLocation();
   return (
     <>
       <Header renderCart={false}/>
-      <Thanks userName={userName} orderId={orderId}/>
+      <Thanks/>
     </>
   );
 }

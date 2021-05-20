@@ -1,10 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik'
 import { useHistory } from "react-router-dom";
+import { fetchOrderRequest } from './../../redux/Order/actions'
+import {
+  getPendingSelector,
+  getOrderSelector,
+  getErrorSelector,
+} from "./../../redux/Order/selectors";
+import { connect } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 
 import './OrderForm.scss'
 
 interface OrderFormProps {
+  productIds: any
 }
 
 const validate = (values: any): any => {
@@ -31,7 +40,7 @@ const validate = (values: any): any => {
   return errors
 }
 
-export const OrderForm = ({ }: OrderFormProps) => {
+const OrderForm = ({ productIds }: OrderFormProps) => {
   const initialValues: any = {
     name: '',
     address: '',
@@ -40,17 +49,47 @@ export const OrderForm = ({ }: OrderFormProps) => {
     phoneNumber: ''
   }
 
+  const dispatch = useDispatch();
+  const pending = useSelector(getPendingSelector);
+  const order = useSelector(getOrderSelector);
+  const error = useSelector(getErrorSelector);
+  const [isThanks, setIsThanks] = useState(false)
   
-    let history = useHistory();
+  let history = useHistory();
+
+  useEffect(() => {
+    if (!pending && !error && isThanks) {
+      history.push({
+        pathname: '/thanks',
+        search: '',
+        state: {
+          updateThank: true, 
+        },
+      });
+    }
+  }, [pending]);
 
   const placeOrder = () => {
-    history.push({
-  pathname: '/thanks',
-  search: '',  // query string
-  state: {  // location state
-    updateThank: true, 
-  },
-});
+    setIsThanks(true)
+    var ids: any = {};
+    productIds && productIds.productIds && productIds.productIds.forEach(function(i: any) { ids[i] = (ids[i]||0) + 1;});
+    const queryData: any = Object.entries(ids);
+    const orders = queryData.map((id: number[]) => {
+      return {
+        id: id[0],
+        quantity: id[1]
+      }
+    })
+    const { name, id, address, phoneNumber, email } = formik.values
+    const req = {
+      orders,
+      username: name,
+      userId: id,
+      address,
+      phone: phoneNumber,
+      email
+    }
+    dispatch(fetchOrderRequest(req));
   }
 
   //@ts-ignore
@@ -92,7 +131,7 @@ export const OrderForm = ({ }: OrderFormProps) => {
         <label htmlFor="fname">ID*</label>
       </div>
       <div className="col-75">
-      <input name="id" id="id" value={formik.values.id} onBlur={formik.handleBlur} onChange={formik.handleChange} placeholder="*Id here" />
+      <input name="id" id="id" type="number" value={formik.values.id} onBlur={formik.handleBlur} onChange={formik.handleChange} placeholder="*Id here" />
       </div>
       <div className="col-25">
       {formik.touched.id && formik.errors.id ? (
@@ -151,3 +190,15 @@ export const OrderForm = ({ }: OrderFormProps) => {
   );
 }
 
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+  }
+}
+
+const mapStateToProps = (state: any) => {
+      return {
+          productIds: state.foodShop,
+      }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderForm)

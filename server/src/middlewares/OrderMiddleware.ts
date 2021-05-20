@@ -30,7 +30,6 @@ export const createOrderValidation = [
         .withMessage('Please provide a valid address field'),
     body('phone')
         .isString()
-        .notEmpty()
         .withMessage('Please provide a valid phone field'),
     body('email')
         .notEmpty()

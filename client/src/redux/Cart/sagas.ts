@@ -11,9 +11,7 @@ const getCart = ({ productIds }: any) => {
   return axios.get<any>(`http://localhost:3001/api/products/cart?${queryData.map((id: number[]) => `${id[0]}=${id[1]}`).join('&')}`);
 }
 
-/*
-  Worker Saga: Fired on FETCH_TODO_REQUEST action
-*/
+
 function* fetchCartSaga(payload: any) {
   try {
     //@ts-ignore
@@ -32,10 +30,7 @@ function* fetchCartSaga(payload: any) {
   }
 }
 
-/*
-  Starts worker saga on latest dispatched `FETCH_CART_REQUEST` action.
-  Allows concurrent increments.
-*/
+
 function* cartSaga() {
   yield all([takeLatest(FETCH_CART_REQUEST, fetchCartSaga)]);
 }

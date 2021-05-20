@@ -1,6 +1,7 @@
 import { 
     FETCH_FOODSHOP_REQUEST,
-    FETCH_FOODSHOP_UPDATE
+    FETCH_FOODSHOP_UPDATE,
+    RESET_CART_REQUEST
  } from "./foodShopTypes"
 
 export const addProductToCart = (payload: any) => {
@@ -16,3 +17,7 @@ export const updateProductToCart = (payload: any) => {
         payload
     }
 }
+
+export const resetToCart = () => ({
+    type: RESET_CART_REQUEST
+  });

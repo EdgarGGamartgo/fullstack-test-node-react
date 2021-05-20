@@ -1,6 +1,7 @@
 import { 
     FETCH_FOODSHOP_REQUEST,
-    FETCH_FOODSHOP_UPDATE
+    FETCH_FOODSHOP_UPDATE,
+    RESET_CART_REQUEST
 } from "./foodShopTypes"
 
 export const initialState = {
@@ -14,6 +15,13 @@ const reducer = (state = initialState, action: any) => {
                 ...state,
                 productIds: [...state.productIds, action.payload]
             }
+        case RESET_CART_REQUEST:
+            return {
+                ...state,
+                pending: false,
+                productIds: [],
+                error: null,
+            };
         case FETCH_FOODSHOP_UPDATE:
             return {
                 ...state,
