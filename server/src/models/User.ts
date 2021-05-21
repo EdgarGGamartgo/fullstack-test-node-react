@@ -21,11 +21,6 @@ export function UserFactory (sequelize: Sequelize): UserStatic {
             allowNull: false,
             unique: false,
         },
-        // password: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false,
-        //     unique: false,
-        // },
         phone: {
             type: DataTypes.STRING,
             allowNull: false,

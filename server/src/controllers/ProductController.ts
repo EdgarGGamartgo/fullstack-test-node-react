@@ -1,12 +1,11 @@
 import express, { Request, Response } from 'express'
 import { validateRequest } from '@oregtickets/common'
 import { ErrorHandler } from './../handlers'
-import { 
+import {
     getAllProducts,
     getCart,
- } from './../services'
+} from './../services'
 import {
-    //getCartValidation,
     LoggerMiddleware,
 } from './../middlewares'
 
@@ -24,7 +23,7 @@ router.get('/',
         } catch (e) {
             ErrorHandler(req.params, method, e, 'Cant retrieve products')
         }
-})
+    })
 
 router.get('/cart',
     LoggerMiddleware,
@@ -37,6 +36,6 @@ router.get('/cart',
         } catch (e) {
             ErrorHandler(req.params, method, e, 'Cant retrieve cart')
         }
-})
+    })
 
 export { router as ProductController }

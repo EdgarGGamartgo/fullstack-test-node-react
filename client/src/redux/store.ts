@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux'
 import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import storage from 'redux-persist/lib/storage'
 import logger from 'redux-logger'
 import createSagaMiddleware from "redux-saga";
 import rootReducer from './rootReducer'
@@ -18,9 +18,8 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(persistedReducer, composeWithDevTools(
-    applyMiddleware(sagaMiddleware, logger),
-    // other store enhancers if any
-  ))
+  applyMiddleware(sagaMiddleware, logger),
+))
 
 const persistor = persistStore(store)
 

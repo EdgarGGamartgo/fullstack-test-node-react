@@ -2,33 +2,33 @@ import React from 'react';
 import { ProductsList, ThankYou, ShoppingCart } from './layouts'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
-import { store, persistor }  from './redux/store'
+import { store, persistor } from './redux/store'
 
- const ProductsListPage = () => {
+const ProductsListPage = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <ProductsList/>
+        <ProductsList />
       </PersistGate>
     </Provider>
   );
 }
 
- const ThankYouPage = () => {
+const ThankYouPage = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <ThankYou/>
+        <ThankYou />
       </PersistGate>
     </Provider>
   );
 }
 
- const ShoppingCartPage = () => {
+const ShoppingCartPage = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <ShoppingCart/>
+        <ShoppingCart />
       </PersistGate>
     </Provider>
   );

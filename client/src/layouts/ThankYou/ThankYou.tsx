@@ -3,17 +3,9 @@ import { Header, Thanks } from './../../components'
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
-interface ThanksProps {
-    userName?: string,
-    orderId?: string,
-}
+export const ThankYou = () => {
 
-export const ThankYou = ({
-    userName,
-    orderId,
-}: ThanksProps) => {
-
-const location: any = useLocation();
+  const location: any = useLocation();
   const myparam = location;
   let history = useHistory();
 
@@ -23,20 +15,20 @@ const location: any = useLocation();
     const redirect = myparam.state && myparam.state.updateThank
 
     if (!redirect) {
-        history.push({
-          pathname: '/',
-          search: '',  // query string
-          state: {  // location state
-            updateThank: false, 
-          },
-        });
+      history.push({
+        pathname: '/',
+        search: '',
+        state: {
+          updateThank: false,
+        },
+      });
     }
   }, [])
 
   return (
     <>
-      <Header renderCart={false}/>
-      <Thanks/>
+      <Header renderCart={false} />
+      <Thanks />
     </>
   );
 }

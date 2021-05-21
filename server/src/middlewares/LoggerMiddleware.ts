@@ -10,6 +10,5 @@ export const LoggerMiddleware = (req: Request, res: Response, next: NextFunction
         },
         url
     }
-    console.log('SERVICE_REQUEST: ', SERVICE_REQUEST);
     next()
 }

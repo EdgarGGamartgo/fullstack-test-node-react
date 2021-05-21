@@ -27,9 +27,6 @@ const reducer = (state = initialState, action: any) => {
                 ...state,
                 productIds: action.payload
             }
-        
-        
-        
         default: return state
     }
 }

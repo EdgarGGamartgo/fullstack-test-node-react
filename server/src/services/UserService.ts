@@ -1,8 +1,6 @@
 import { User } from './../models'
 import { UserAttrs } from './../types'
 import { v4 as uuidv4 } from 'uuid';
-import { passwordIsValid, token } from './../utils'
-
 
 export const getAllUsersByIsDelete = async(is_deleted: boolean) => {
     return User.findAll({
@@ -42,23 +40,3 @@ export const deleteUser = async (id: string) => {
         }
     })
 }
-
-// export const logIn = async (username: string, requestPassword: string) => {
-//     const user = await User.findOne({
-//         where: {
-//             username
-//         },
-//         raw: true,
-//     })
-//     if (!user) {
-//         throw new BadRequestError('User Not Found!')
-//     }
-//     const { password, id } = user
-//     passwordIsValid(requestPassword, password)
-//     const accessToken = token(id!)
-//     const response = {
-//         ...user,
-//         accessToken
-//     }
-//     return response
-//}

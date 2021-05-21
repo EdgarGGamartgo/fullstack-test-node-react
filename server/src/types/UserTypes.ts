@@ -3,7 +3,6 @@ import { BuildOptions, Model } from "sequelize";
 export interface UserAttrs {
     id?: string;
     username: string;
-    //password: string;
     address: string;
     phone: string;
     is_deleted: boolean;

@@ -3,13 +3,6 @@ import {
   FETCH_TODO_FAILURE,
   FETCH_TODO_SUCCESS,
 } from "./actionTypes";
-import {
-  FetchTodoRequest,
-  FetchTodoSuccess,
-  FetchTodoSuccessPayload,
-  FetchTodoFailure,
-  FetchTodoFailurePayload,
-} from "./types";
 
 export const fetchTodoRequest = (page: number, size: number) => ({
   type: FETCH_TODO_REQUEST,

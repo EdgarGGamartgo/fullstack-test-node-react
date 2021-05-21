@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express'
 import { validateRequest } from '@oregtickets/common'
 import { ErrorHandler } from './../handlers'
-import { 
+import {
     createOrder,
- } from './../services'
+} from './../services'
 import {
     createOrderValidation,
     LoggerMiddleware,
@@ -23,6 +23,6 @@ router.post('/',
         } catch (e) {
             ErrorHandler(req.body, method, e, 'Cant create order')
         }
-})
+    })
 
 export { router as OrderController }

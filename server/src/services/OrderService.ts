@@ -1,4 +1,4 @@
-import { Order, User } from './../models'
+import { Order } from './../models'
 import { db } from './../data-access/dbConnect'
 import { createUser, getUserById } from './UserService'
 import { v4 as uuidv4 } from 'uuid';

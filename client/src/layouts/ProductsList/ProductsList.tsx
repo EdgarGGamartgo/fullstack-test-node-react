@@ -1,12 +1,11 @@
 import React from 'react';
-import  { Header, CardsList } from './../../components'
-import './ProductsList.scss'
+import { Header, CardsList } from './../../components'
 
 export const ProductsList = () => {
   return (
     <>
-      <Header renderCart={true}/>
-      <CardsList/>
+      <Header renderCart={true} />
+      <CardsList />
     </>
   );
 }

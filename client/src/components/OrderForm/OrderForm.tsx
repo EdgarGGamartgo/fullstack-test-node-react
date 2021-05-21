@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import { fetchOrderRequest } from './../../redux/Order/actions'
 import {
   getPendingSelector,
-  getOrderSelector,
   getErrorSelector,
 } from "./../../redux/Order/selectors";
 import { connect } from 'react-redux'
@@ -13,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import './OrderForm.scss'
 
 interface OrderFormProps {
-  productIds: any
+  productIds?: any
 }
 
 const validate = (values: any): any => {
@@ -51,10 +50,9 @@ const OrderForm = ({ productIds }: OrderFormProps) => {
 
   const dispatch = useDispatch();
   const pending = useSelector(getPendingSelector);
-  const order = useSelector(getOrderSelector);
   const error = useSelector(getErrorSelector);
   const [isThanks, setIsThanks] = useState(false)
-  
+
   let history = useHistory();
 
   useEffect(() => {
@@ -63,7 +61,7 @@ const OrderForm = ({ productIds }: OrderFormProps) => {
         pathname: '/thanks',
         search: '',
         state: {
-          updateThank: true, 
+          updateThank: true,
         },
       });
     }
@@ -72,7 +70,7 @@ const OrderForm = ({ productIds }: OrderFormProps) => {
   const placeOrder = () => {
     setIsThanks(true)
     var ids: any = {};
-    productIds && productIds.productIds && productIds.productIds.forEach(function(i: any) { ids[i] = (ids[i]||0) + 1;});
+    productIds && productIds.productIds && productIds.productIds.forEach(function (i: any) { ids[i] = (ids[i] || 0) + 1; });
     const queryData: any = Object.entries(ids);
     const orders = queryData.map((id: number[]) => {
       return {
@@ -100,105 +98,89 @@ const OrderForm = ({ productIds }: OrderFormProps) => {
 
   return (
     <>
-    <h5>Ready to Order?</h5>
-    <div className="container">
-  <form>
-  <div className="row">
-   
-  <div className="col-75">
-  <label >Customer Information</label>
-</div>
- </div>
-   
+      <h5>Ready to Order?</h5>
+      <div className="container">
+        <form>
+          <div className="row">
 
-    <div className="row">
-      <div className="col-25">
-        <label htmlFor="fname">Full Name*</label>
+            <div className="col-75">
+              <label >Customer Information</label>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-25">
+              <label htmlFor="fname">Full Name*</label>
+            </div>
+            <div className="col-75">
+              <input name="name" id="name" value={formik.values.name} onBlur={formik.handleBlur} onChange={formik.handleChange} placeholder="*Name here" />
+            </div>
+            <div className="col-25">
+              {formik.touched.name && formik.errors.name ? (
+                <label className='required'>{formik.errors.name}</label>
+              ) : null}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-25">
+              <label htmlFor="fname">ID*</label>
+            </div>
+            <div className="col-75">
+              <input name="id" id="id" type="number" value={formik.values.id} onBlur={formik.handleBlur} onChange={formik.handleChange} placeholder="*Id here" />
+            </div>
+            <div className="col-25">
+              {formik.touched.id && formik.errors.id ? (
+                <label className='required'>{formik.errors.id}</label>
+              ) : null}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-25">
+              <label htmlFor="fname">Address*</label>
+            </div>
+            <div className="col-75">
+              <input name="address" id="address" value={formik.values.address} onBlur={formik.handleBlur} onChange={formik.handleChange} placeholder="*Address here" />
+            </div>
+            <div className="col-25">
+              {formik.touched.address && formik.errors.address ? (
+                <label className='required'>{formik.errors.address}</label>
+              ) : null}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-25">
+              <label htmlFor="fname">Phone Number</label>
+            </div>
+            <div className="col-75">
+              <input name="phoneNumber" id="phoneNumber" value={formik.values.phoneNumber} onBlur={formik.handleBlur} onChange={formik.handleChange} placeholder="Phone Number here" />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-25">
+              <label htmlFor="fname">Email*</label>
+            </div>
+            <div className="col-75">
+              <input name="email" id="email" value={formik.values.email} onBlur={formik.handleBlur} onChange={formik.handleChange} placeholder="*Email here" />
+            </div>
+            <div className="col-25">
+              {formik.touched.email && formik.errors.email ? (
+                <label className='required'>{formik.errors.email}</label>
+              ) : null}
+            </div>
+          </div>
+        </form>
       </div>
-      <div className="col-75">
-        <input name="name" id="name" value={formik.values.name} onBlur={formik.handleBlur} onChange={formik.handleChange} placeholder="*Name here" />
-      </div>
-      <div className="col-25">
-      {formik.touched.name && formik.errors.name ? (
-          <label className='required'>{formik.errors.name}</label>
-        ) : null}
-      </div>
-    </div>
-
-
-    <div className="row">
-      <div className="col-25">
-        <label htmlFor="fname">ID*</label>
-      </div>
-      <div className="col-75">
-      <input name="id" id="id" type="number" value={formik.values.id} onBlur={formik.handleBlur} onChange={formik.handleChange} placeholder="*Id here" />
-      </div>
-      <div className="col-25">
-      {formik.touched.id && formik.errors.id ? (
-          <label className='required'>{formik.errors.id}</label>
-        ) : null}
-      </div>
-    </div>
-
-    <div className="row">
-      <div className="col-25">
-        <label htmlFor="fname">Address*</label>
-      </div>
-      <div className="col-75">
-      <input name="address" id="address" value={formik.values.address} onBlur={formik.handleBlur} onChange={formik.handleChange} placeholder="*Address here" />
-      </div>
-      <div className="col-25">
-      {formik.touched.address && formik.errors.address ? (
-          <label className='required'>{formik.errors.address}</label>
-        ) : null}
-      </div>
-    </div>
-
-    <div className="row">
-      <div className="col-25">
-        <label htmlFor="fname">Phone Number</label>
-      </div>
-      <div className="col-75">
-      <input name="phoneNumber" id="phoneNumber" value={formik.values.phoneNumber} onBlur={formik.handleBlur} onChange={formik.handleChange} placeholder="Phone Number here" />
-      </div>
-    </div>
-
-    <div className="row">
-      <div className="col-25">
-        <label htmlFor="fname">Email*</label>
-      </div>
-      <div className="col-75">
-      <input name="email" id="email" value={formik.values.email} onBlur={formik.handleBlur} onChange={formik.handleChange} placeholder="*Email here" />
-      </div>
-      <div className="col-25">
-      {formik.touched.email && formik.errors.email ? (
-          <label className='required'>{formik.errors.email}</label>
-        ) : null}
-      </div>
-    </div>
-    
-    
-  </form>
-
-  
-</div>
-<div className="form-actions">
+      <div className="form-actions">
         <button disabled={formik.isValid && formik.values.id !== '' ? false : true} onClick={placeOrder}>Place Order</button>
         <a href='/'>Back to List</a>
-  </div>
-  </>
+      </div>
+    </>
   );
 }
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapStateToProps = (state: any) => {
   return {
+    productIds: state.foodShop,
   }
 }
 
-const mapStateToProps = (state: any) => {
-      return {
-          productIds: state.foodShop,
-      }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(OrderForm)
+export default connect(mapStateToProps, null)(OrderForm)

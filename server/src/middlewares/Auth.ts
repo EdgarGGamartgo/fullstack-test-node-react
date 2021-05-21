@@ -16,8 +16,6 @@ export const VerifyToken = async (req: Request, res: Response, next: NextFunctio
                 message: 'Forbidden Error'
             })
         }
-        // const { id } = decoded as any
-        // (req as any).id = id
         next()
     })
 }
